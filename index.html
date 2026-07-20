@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLAMIX</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-principal: #F76806;
+    --color-secundario: #000000;
+    --fuente-titulos: 'Montserrat', sans-serif;
+    --fuente-cuerpo: 'Inter', sans-serif;
+  }
+  body { background-color: var(--color-principal); color: var(--color-secundario); font-family: var(--fuente-cuerpo); margin:0; padding:0; line-height:1.5; }
+  .seccion { padding: 60px 20px; text-align: center; }
+  .contenedor { max-width: 1100px; margin: 0 auto; }
+  .negrita-extra { font-weight: 900; text-transform: uppercase; font-family: var(--fuente-titulos); }
+  
+  .btn-accion { background-color: var(--color-secundario); color: white; padding: 18px 40px; border: none; border-radius: 5px; font-family: var(--fuente-titulos); font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+  .btn-accion:hover { transform: scale(1.05); filter: brightness(1.2); }
+  
+  /* Animación Fuego */
+  @keyframes fuego { 0% { box-shadow: 0 0 10px #F76806; } 50% { box-shadow: 0 0 20px #FF4500, 0 0 30px #FF8C00; } 100% { box-shadow: 0 0 10px #F76806; } }
+  .btn-fuego { animation: fuego 1.5s infinite; }
+
+  .grid-resultados { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px; }
+  .tarjeta-resultado { background: var(--color-secundario); border-radius: 12px; padding: 20px; color: white; text-align: center; }
+  
+  .player-box { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 20px; }
+  .btn-play-pause { background: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .slider-container { background: #333; display: flex; border-radius: 25px; padding: 4px; cursor: pointer; width: 180px; }
+  .slider-option { padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; width: 50%; transition: 0.3s; color: #aaa; }
+  .slider-option.active { background: white; color: black; }
+  
+  .grid-pasos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 800px; margin: 40px auto; text-align: center; }
+  .paso h4 { margin: 0 0 10px 0; font-family: var(--fuente-titulos); font-size: 1.1rem; }
+  .paso p { margin: 0; font-size: 0.95rem; }
+  
+  .tabla-precios { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); border: 2px solid var(--color-secundario); margin-top: 40px; }
+  .plan { padding: 40px 20px; border: 1px solid var(--color-secundario); }
+  
+  /* CORRECCIÓN: Alineación de listas a la izquierda de forma limpia */
+  .plan ul { text-align: left; display: inline-block; padding-left: 20px; }
+  .plan li { text-align: left; margin-bottom: 8px; }
+  
+  .plan-precio { font-size: 1.8rem; font-weight: 900; }
+  
+  .footer-form { background-color: var(--color-secundario); color: white; padding: 60px 20px; }
+  .footer-form input, .footer-form select { padding: 15px; width: 80%; max-width: 400px; margin-bottom: 15px; border-radius: 5px; border: none; display:block; margin-left:auto; margin-right:auto; }
+</style>
+</head>
+<body>
+  <section class="seccion hero">
+    <div class="contenedor">
+      <h1 class="negrita-extra">FLAMIX</h1>
+      <p>Co-producción, mezcla y masterización premium para artistas urbanos que quieren lanzar música con sonido comercial para Spotify, Tiktok, etc. desde su Home Studio.</p>
+      <button class="btn-accion" onclick="document.getElementById('form-final').scrollIntoView({behavior:'smooth'})">🎵 Solicitar mi Plaza</button>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <h2 class="negrita-extra">Resultados Antes y Después</h2>
+      <div class="grid-resultados">
+        <div class="tarjeta-resultado"><h3>Track 1</h3><div class="player-box" data-orig="https://erickvo98.github.io/flamix-assets/TRACK1ORIGINAL.mp3" data-proc="https://erickvo98.github.io/flamix-assets/TRACK1PROCESADO.mp3"><button class="btn-play-pause" onclick="playPause(this)">▶</button><div class="slider-container" onclick="toggleAudio(this)"><div class="slider-option active">Original</div><div class="slider-option">Processed</div></div></div></div>
+        <div class="tarjeta-resultado"><h3>Track 2</h3><div class="player-box" data-orig="https://erickvo98.github.io/flamix-assets/TRACK2ORIGINAL.mp3" data-proc="https://erickvo98.github.io/flamix-assets/TRACK2PROCESADO.mp3"><button class="btn-play-pause" onclick="playPause(this)">▶</button><div class="slider-container" onclick="toggleAudio(this)"><div class="slider-option active">Original</div><div class="slider-option">Processed</div></div></div></div>
+        <div class="tarjeta-resultado"><h3>Track 3</h3><div class="player-box" data-orig="https://erickvo98.github.io/flamix-assets/TRACK3ORIGINAL.mp3" data-proc="https://erickvo98.github.io/flamix-assets/TRACK3PROCESADO.mp3"><button class="btn-play-pause" onclick="playPause(this)">▶</button><div class="slider-container" onclick="toggleAudio(this)"><div class="slider-option active">Original</div><div class="slider-option">Processed</div></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    let activePlayer = null;
+    function playPause(btn) {
+      const wrapper = btn.parentElement;
+      if (!wrapper.origAudio) {
+        wrapper.origAudio = new Audio(wrapper.dataset.orig);
+        wrapper.procAudio = new Audio(wrapper.dataset.proc);
+        wrapper.origAudio.loop = true; wrapper.procAudio.loop = true;
+        wrapper.origAudio.volume = 1; wrapper.procAudio.volume = 0;
+      }
+      if (activePlayer && activePlayer !== wrapper) {
+        activePlayer.origAudio.pause(); activePlayer.procAudio.pause();
+        activePlayer.querySelector('.btn-play-pause').innerHTML = "▶";
+        activePlayer.isPlaying = false;
+      }
+      if (wrapper.isPlaying) {
+        wrapper.origAudio.pause(); wrapper.procAudio.pause();
+        btn.innerHTML = "▶"; activePlayer = null;
+      } else {
+        wrapper.origAudio.play(); wrapper.procAudio.play();
+        btn.innerHTML = "⏸"; activePlayer = wrapper;
+      }
+      wrapper.isPlaying = !wrapper.isPlaying;
+    }
+    function toggleAudio(container) {
+      const wrapper = container.parentElement;
+      if (!wrapper.origAudio) return;
+      const options = container.querySelectorAll('.slider-option');
+      if (wrapper.origAudio.volume === 1) {
+        wrapper.origAudio.volume = 0; wrapper.procAudio.volume = 1;
+        wrapper.procAudio.currentTime = wrapper.origAudio.currentTime;
+        options[0].classList.remove('active'); options[1].classList.add('active');
+      } else {
+        wrapper.procAudio.volume = 0; wrapper.procAudio.volume = 1;
+        wrapper.origAudio.currentTime = wrapper.procAudio.currentTime;
+        options[1].classList.remove('active'); options[0].classList.add('active');
+      }
+    }
+  </script>
+
+  <section class="seccion" style="background: rgba(0,0,0,0.05);">
+    <div class="contenedor">
+      <h2 class="negrita-extra">CÓMO FUNCIONA</h2>
+      <p>Para artistas urbanos que buscan un sonido competitivo y profesional.</p>
+      <div class="grid-pasos">
+        <div class="paso"><h4>#1. 🎯 DIAGNÓSTICO</h4><p>Analizamos tu canción y definimos el sonido comercial que buscas antes de empezar.</p></div>
+        <div class="paso"><h4>#2. 🎙️ CO-PRODUCCIÓN</h4><p>Editamos, afinamos y diseñamos tu voz para que se integre perfectamente con el beat.</p></div>
+        <div class="paso"><h4>#3. 🔥 MEZCLA FLAMIX™</h4><p>Aplicamos nuestro sonido "In Your Face" para lograr potencia, claridad y pegada profesional.</p></div>
+        <div class="paso"><h4>#4. 🚀 ENTREGA READY</h4><p>Recibes tu canción lista para Spotify, TikTok, YouTube y shows en vivo.</p></div>
+      </div>
+      <button class="btn-accion" onclick="document.getElementById('form-final').scrollIntoView({behavior:'smooth'})">QUIERO EMPEZAR</button>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <h2 class="negrita-extra">Nuestros Planes</h2>
+      <div class="tabla-precios">
+        <div class="plan"><h3>MAXO</h3><p>Precio Regular</p><ul><li>Sistema FLAMIX™ completo</li><li>Co-Producción Vocal</li><li>Mezcla Premium "In Your Face"</li><li>Master Comercial</li><li>Beat Recovery™ con IA</li><li>Hasta 3 Revisiones</li><li>Versión Show</li><li>Acapella Procesada</li><li>Instrumental Optimizada</li><li>WAV + MP3</li><li>Feedback Profesional</li></ul><div class="plan-precio">S/650</div></div>
+        <div class="plan" style="background: white;"><h3>MAXO | Founder Access</h3><p>🔥 Precio de lanzamiento • Cupos limitados</p><ul><li>Todo lo incluido en MAXO</li><li>Ahorra S/390</li><li>Mismo proceso y calidad premium</li><li>Acceso a la Tarifa Fundadores</li><li>Precio disponible por tiempo limitado</li></ul><div class="plan-precio">S/260</div></div>
+        <div class="plan"><h3>EP / Álbum</h3><p>Para artistas que lanzan varios temas</p><ul><li>Descuento por volumen</li><li>Consistencia sonora en todo el proyecto</li><li>Prioridad en agenda</li><li>Plan de trabajo personalizado</li></ul><div class="plan-precio">Cotización Personalizada</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-form" id="form-final">
+    <div class="contenedor">
+      <h2 class="negrita-extra" style="color: var(--color-principal);">🎤 Solicita tu Plaza en FLAMIX™</h2>
+      <form action="https://formsubmit.co/flamix.studio98@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Nombre completo" required>
+        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+        <select name="genero" required><option value="" disabled selected>¿Qué género haces?</option><option value="Trap">Trap</option><option value="Reggaetón">Reggaetón</option><option value="R&B">R&B</option><option value="Drill">Drill</option><option value="Otro">Otro</option></select>
+        <input type="url" name="demo_link" placeholder="Link de tu demo (Drive, YouTube privado, etc.)" required>
+        <button type="submit" class="btn-accion btn-fuego">Enviar Solicitud</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>
